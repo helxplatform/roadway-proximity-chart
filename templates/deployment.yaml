@@ -20,10 +20,7 @@ spec:
       labels:
         {{- include "road.selectorLabels" . | nindent 8 }}
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      imagePullSecrets: {{ .Values.imagePullSecrets }}
       serviceAccountName: {{ include "road.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
@@ -43,80 +40,80 @@ spec:
             {{- end }}
             {{ if .Values.connexion.debug }}
             - name: CONNEXION_DEBUG
-            valueFrom:
-              secretKeyRef:
-                key: CONNEXION_DEBUG
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: CONNEXION_DEBUG
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.connexion.port }}
             - name: CONNEXION_PORT
-            valueFrom:
-              secretKeyRef:
-                key: CONNEXION_PORT
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: CONNEXION_PORT
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.connexion.keyfile }}
             - name: CONNEXION_KEY_FILE
-            valueFrom:
-              secretKeyRef:
-                key: CONNEXION_KEY_FILE
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: CONNEXION_KEY_FILE
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.connexion.certfile }}
             - name: CONNEXION_CERT_FILE
-            valueFrom:
-              secretKeyRef:
-                key: CONNEXION_CERT_FILE
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: CONNEXION_CERT_FILE
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.sysPath.exposures }}
             - name: EXPOSURES
-            valueFrom:
-              secretKeyRef:
-                key: EXPOSURES
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: EXPOSURES
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.sysPath.controllers }}
             - name: CONTROLLERS
-            valueFrom:
-              secretKeyRef:
-                key: CONTROLLERS
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: CONTROLLERS
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.postgres.host }}
             - name: POSTGRES_HOST
-            valueFrom:
-              secretKeyRef:
-                key: POSTGRES_HOST
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_HOST
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.postgres.port }}
             - name: POSTGRES_PORT
-            valueFrom:
-              secretKeyRef:
-                key: POSTGRES_PORT
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PORT
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.postgres.database }}
             - name: POSTGRES_DATABASE
-            valueFrom:
-              secretKeyRef:
-                key: POSTGRES_DATABASE
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_DATABASE
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.postgres.username }}
             - name: POSTGRES_USERNAME
-            valueFrom:
-              secretKeyRef:
-                key: POSTGRES_USERNAME
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_USERNAME
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
             {{ if .Values.postgres.password }}
             - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                key: POSTGRES_PASSWORD
-                name: {{ include "road.fullname" . }}-env
+              valueFrom:
+                secretKeyRef:
+                  key: POSTGRES_PASSWORD
+                  name: {{ include "road.fullname" . }}-env
             {{- end }}
           ports:
             - name: http
